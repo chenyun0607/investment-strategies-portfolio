@@ -1,6 +1,6 @@
-# Investment Strategies Portfolio
+# Momentum Investing & Pairs Trading
 
-This repository contains implementations, analysis, and backtests of **quantitative trading strategies**, focusing on **Momentum Investing** and **Pairs Trading**. The work is based on research and projects from the Department of Statistics at Rice University (STAT 686 – Market Model Mini Project 1).
+This repository contains implementations, analysis, and backtests of **quantitative trading strategies**, focusing on **Momentum Investing** and **Pairs Trading**. The work is based on research and projects from the Department of Statistics at Rice University.
 
 ---
 
@@ -28,7 +28,7 @@ This repository contains implementations, analysis, and backtests of **quantitat
 
 ---
 
-## 📊 Data
+## Data
 - Primary: **S&P 500 constituents** (daily price data, 2005–2024)  
 - Sources:  
   - [Yahoo Finance API (`yfinance`)](https://pypi.org/project/yfinance/)  
@@ -44,4 +44,40 @@ This repository contains implementations, analysis, and backtests of **quantitat
 - Autocorrelation function (ACF) for persistence/reversal detection  
 - Backtesting metrics: cumulative return, Sharpe ratio, max drawdown, avg win/loss  
 - Assumptions: frictionless markets, no arbitrage, persistence of momentum effects  
+
+
+---
+
+## Findings & Insights
+
+Our analysis across multiple strategies led to several key takeaways:
+
+1. **Momentum Persistence**
+   - Momentum is weak at short horizons (daily, weekly) but **more persistent at monthly and yearly horizons**.
+   - Intermediate-term lookbacks (e.g., 12 months) provided the most reliable signals.
+
+2. **Cross-Sectional Momentum**
+   - Seasonal rebalancing (quarterly) generated **higher cumulative returns** (≈ 378%) than classic semiannual rebalancing (≈ 284%).  
+   - However, this came at the cost of **higher volatility and drawdowns**, showing a clear return–risk tradeoff.
+
+3. **Time-Series Momentum**
+   - Short-term models (21- or 63-day) often underperformed due to **whipsaw trades and high volatility**.  
+   - The **252-day lookback** strategy produced **more stable and positive returns**, though it still lagged buy-and-hold in absolute performance.
+
+4. **Pairs Trading**
+   - **Cointegration-based methods** outperformed correlation- and distance-based approaches, offering statistically validated long-term relationships.  
+   - **Machine learning (PCA + KMeans)** improved pair selection by clustering stocks with similar behavior, leading to stronger mean-reversion trades (e.g., MKC & WAB).
+
+5. **Cross-Asset Enhancements**
+   - The Improved Cross-Asset TSMOM (I-XTSM) using industrial metals as an external signal significantly **reduced drawdowns** and outperformed standard momentum in stress periods (e.g., 2008).  
+   - Demonstrates the value of integrating **macro signals** for crash protection.
+
+6. **Limitations**
+   - Backtests assume **frictionless markets** (no transaction costs/slippage).  
+   - Real-world performance may differ due to market impact, regime shifts, and execution costs.
+
+**Overall takeaway:**  
+- Momentum strategies work best at **intermediate horizons**,  
+- Pairs trading is strongest when backed by **cointegration or ML-based selection**,  
+- And **cross-asset signals** can help mitigate the risks of momentum crashes.
 
